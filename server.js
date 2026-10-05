@@ -190,7 +190,7 @@ function handleUpload(request, response) {
     sendJson(response, 201, {
       ...asset,
       extension: extension.slice(1).toUpperCase(),
-      url: `${origin}/asset/${id}${extension}`,
+      url: `${origin}/i/${id}`,
     });
   });
 }
@@ -225,7 +225,7 @@ const server = http.createServer((request, response) => {
       extension: path.extname(asset.name).slice(1).toUpperCase(),
       type: asset.type,
       size: asset.size,
-      url: `${origin}/asset/${asset.id}${path.extname(asset.name)}`,
+      url: `${origin}/i/${asset.id}`,
     }));
 
     response.writeHead(200, {
@@ -235,6 +235,22 @@ const server = http.createServer((request, response) => {
       "X-Content-Type-Options": "nosniff",
     });
     response.end(JSON.stringify({ assets: listedAssets }));
+    return;
+  }
+
+  if (pathname.startsWith("/i/")) {
+    const id = pathname.slice("/i/".length);
+    const asset = assets.find((item) => item.id === id);
+    if (!asset || !/^[a-f0-9]{10}$/.test(id)) {
+      response.writeHead(404);
+      response.end("Not found");
+      return;
+    }
+
+    response.writeHead(302, {
+      Location: `/asset/${asset.id}${path.extname(asset.fileName)}`,
+    });
+    response.end();
     return;
   }
 
