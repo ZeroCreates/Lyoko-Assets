@@ -74,14 +74,14 @@ function makeAssetCard(asset, index) {
   idButton.className = "asset-id-button";
   idButton.type = "button";
   idButton.textContent = `ID ${asset.id}`;
-  idButton.title = "Copy asset ID";
-  idButton.setAttribute("aria-label", `Copy ID ${asset.id}`);
+  idButton.title = "Copy asset link";
+  idButton.setAttribute("aria-label", `Copy link for ${asset.name}`);
   idButton.addEventListener("click", async () => {
     try {
-      await navigator.clipboard.writeText(asset.id);
-      showToast(`ID ${asset.id} copied`);
+      await navigator.clipboard.writeText(asset.url);
+      showToast("Asset link copied");
     } catch {
-      showToast("Could not copy ID");
+      showToast("Could not copy link");
     }
   });
   metadata.append(idButton, separator, format, separator.cloneNode(true), size);
