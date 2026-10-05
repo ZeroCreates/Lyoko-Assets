@@ -17,6 +17,7 @@ function showToast(message) {
 
 function getVariant(name) {
   const normalized = name.toLowerCase();
+  if (normalized.includes("human")) return "human";
   if (normalized.includes("xana")) return "xana";
   if (normalized.includes("normal")) return "normal";
   return "standard";
