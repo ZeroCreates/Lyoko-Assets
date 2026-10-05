@@ -2,6 +2,8 @@ const grid = document.querySelector("#asset-grid");
 const emptyState = document.querySelector("#empty-state");
 const searchInput = document.querySelector("#search-input");
 const filterButtons = [...document.querySelectorAll("[data-filter]")];
+const addAssetsButton = document.querySelector("#add-assets");
+const uploadInput = document.querySelector("#upload-input");
 const toast = document.querySelector("#toast");
 
 let assets = [];
@@ -68,7 +70,21 @@ function makeAssetCard(asset, index) {
   separator.textContent = "/";
   const size = document.createElement("span");
   size.textContent = formatSize(asset.size);
-  metadata.append(format, separator, size);
+  const idButton = document.createElement("button");
+  idButton.className = "asset-id-button";
+  idButton.type = "button";
+  idButton.textContent = `ID ${asset.id}`;
+  idButton.title = "Copy asset ID";
+  idButton.setAttribute("aria-label", `Copy ID ${asset.id}`);
+  idButton.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(asset.id);
+      showToast(`ID ${asset.id} copied`);
+    } catch {
+      showToast("Could not copy ID");
+    }
+  });
+  metadata.append(idButton, separator, format, separator.cloneNode(true), size);
 
   const copyButton = document.createElement("button");
   copyButton.className = "copy-button";
@@ -110,6 +126,41 @@ filterButtons.forEach((button) => {
 });
 
 searchInput.addEventListener("input", renderAssets);
+addAssetsButton.addEventListener("click", () => uploadInput.click());
+uploadInput.addEventListener("change", async () => {
+  const files = [...uploadInput.files];
+  if (files.length === 0) return;
+
+  const buttonLabel = addAssetsButton.querySelector("span");
+  addAssetsButton.disabled = true;
+  buttonLabel.textContent = "Adding...";
+
+  let addedCount = 0;
+  let failedCount = 0;
+  try {
+    for (const file of files) {
+      const response = await fetch("/api/assets", {
+        method: "POST",
+        headers: { "X-File-Name": encodeURIComponent(file.name) },
+        body: file,
+      });
+      if (response.ok) {
+        addedCount += 1;
+      } else {
+        failedCount += 1;
+      }
+    }
+    await loadAssets();
+    showToast(failedCount ? `${addedCount} added, ${failedCount} failed` : `${addedCount} asset${addedCount === 1 ? "" : "s"} added`);
+  } catch {
+    showToast("Upload failed. Check the server and try again.");
+  } finally {
+    uploadInput.value = "";
+    addAssetsButton.disabled = false;
+    buttonLabel.textContent = "Add assets";
+  }
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "/" && document.activeElement !== searchInput) {
     event.preventDefault();

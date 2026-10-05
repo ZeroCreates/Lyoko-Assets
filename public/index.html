@@ -69,7 +69,14 @@
             <input id="search-input" type="search" placeholder="Search assets" autocomplete="off">
             <kbd>/</kbd>
           </label>
-          <div class="sort-label"><span class="sort-dot" aria-hidden="true"></span> NAME <span class="sort-arrow" aria-hidden="true">↑</span></div>
+          <div class="toolbar-actions">
+            <div class="sort-label"><span class="sort-dot" aria-hidden="true"></span> NAME <span class="sort-arrow" aria-hidden="true">↑</span></div>
+            <button class="add-button" id="add-assets" type="button">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3m0 0L6.5 6.5M10 3l3.5 3.5M4 12v4a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4"/></svg>
+              <span>Add assets</span>
+            </button>
+            <input id="upload-input" type="file" accept="image/png,image/jpeg,image/gif,image/webp,image/avif" multiple hidden>
+          </div>
         </div>
 
         <div id="asset-grid" class="asset-grid" aria-live="polite">

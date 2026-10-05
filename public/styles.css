@@ -132,8 +132,8 @@ h1 {
 .subheading { margin: 0; color: #777c74; font-size: 12px; }
 .asset-total { display: flex; align-items: baseline; gap: 7px; margin-bottom: 5px; color: #555a52; font-size: 16px; }
 .total-label { color: #8b8f86; font-size: 9px; }
-.toolbar { display: flex; align-items: center; justify-content: space-between; margin: 31px 0 17px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-.search-box { width: min(310px, 70%); height: 35px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 1px solid #dedfd6; border-radius: 3px; background: rgba(255, 254, 250, .68); }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 31px 0 17px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.search-box { width: min(310px, 70%); min-width: 120px; height: 35px; display: flex; align-items: center; gap: 10px; padding: 0 10px; border: 1px solid #dedfd6; border-radius: 3px; background: rgba(255, 254, 250, .68); }
 .search-icon { width: 12px; height: 12px; position: relative; border: 1.4px solid #777d74; border-radius: 50%; }
 .search-icon::after { position: absolute; right: -4px; bottom: -2px; width: 5px; height: 1px; content: ""; transform: rotate(48deg); background: #777d74; }
 .search-box input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 11px; }
@@ -142,6 +142,11 @@ h1 {
 .sort-label { display: flex; align-items: center; gap: 7px; color: #787d74; font-size: 9px; }
 .sort-dot { width: 5px; height: 5px; background: #a4a99c; }
 .sort-arrow { color: #4b5049; font-size: 12px; }
+.toolbar-actions { display: flex; align-items: center; gap: 16px; }
+.add-button { min-height: 35px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 11px; border: 1px solid #252a25; border-radius: 3px; background: #252a25; color: #fffefa; font-size: 10px; font-weight: 700; cursor: pointer; transition: background .15s, color .15s; }
+.add-button:hover:not(:disabled) { background: #3e4938; }
+.add-button:disabled { opacity: .65; cursor: wait; }
+.add-button svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5; }
 
 .asset-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; }
 .asset-card { min-width: 0; overflow: hidden; border: 1px solid #e1e0d8; border-radius: 3px; background: var(--white); animation: reveal .35s both; animation-delay: calc(var(--card-order, 0) * 45ms); }
@@ -154,6 +159,8 @@ h1 {
 .asset-details { position: relative; min-height: 67px; padding: 13px 43px 12px 13px; }
 .asset-name { overflow: hidden; margin: 0 0 7px; color: #292d29; font-size: 11px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 .asset-meta { display: flex; align-items: center; gap: 7px; color: #888c82; font-size: 9px; }
+.asset-id-button { padding: 0; border: 0; background: none; color: #657354; font-family: var(--mono); font-size: 8px; cursor: pointer; }
+.asset-id-button:hover { color: #293c1f; text-decoration: underline; }
 .meta-separator { color: #c3c4bd; }
 .copy-button { position: absolute; top: 17px; right: 12px; width: 29px; height: 29px; display: grid; place-items: center; border: 1px solid #e3e4db; border-radius: 3px; background: transparent; color: #5d6459; cursor: pointer; transition: background .15s, border-color .15s, color .15s; }
 .copy-button:hover { border-color: var(--ink); background: var(--ink); color: white; }
@@ -196,6 +203,9 @@ h1 {
   .subheading { font-size: 11px; }
   .asset-total { font-size: 14px; }
   .toolbar { margin-top: 25px; }
+  .toolbar-actions { gap: 0; }
+  .sort-label { display: none; }
+  .add-button { gap: 5px; padding: 0 8px; font-size: 9px; }
   .asset-grid { gap: 10px; }
   .asset-preview { height: clamp(155px, 55vw, 235px); }
   .asset-preview img { padding: 13px; }

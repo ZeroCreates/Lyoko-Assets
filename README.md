@@ -14,20 +14,23 @@ Open <http://localhost:3000>. Set `PORT` to use a different port. Set `PUBLIC_OR
 
 ## Link provider
 
-`GET /api/links` returns JSON with the direct URL and basic file metadata for every supported asset in `Assets/`:
+`GET /api/links` returns JSON with a persistent ID, ID-based URL, and basic file metadata for every supported asset in `Assets/`:
 
 ```json
 {
   "assets": [
     {
+      "id": "a1b2c3d4e5",
       "name": "Lyoko Form Normal.png",
       "extension": "PNG",
       "type": "image/png",
       "size": 12345,
-      "url": "http://localhost:3000/assets/Lyoko%20Form%20Normal.png"
+      "url": "http://localhost:3000/asset/a1b2c3d4e5"
     }
   ]
 }
 ```
 
-The app refreshes the listing each time the endpoint is requested. Direct files are served from `GET /assets/<filename>`. The endpoint is read-only and allows cross-origin GET requests.
+Open the browser and choose **Add assets** to upload PNG, JPEG, GIF, WebP, or AVIF images up to 25 MB each. Each upload gets a persistent ID. Click an ID in its asset card to copy it, or use its direct URL, for example `GET /asset/a1b2c3d4e5`. IDs are saved in `.asset-index.json` and remain stable across restarts. Existing direct filename links at `GET /assets/<filename>` continue to work.
+
+`POST /api/assets` accepts one raw image per request with its URL-encoded original name in the `X-File-Name` header. The browser handles this automatically. The link-provider endpoint remains read-only and allows cross-origin GET requests.
