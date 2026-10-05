@@ -7,7 +7,7 @@ const root = __dirname;
 const assetsDirectory = path.join(root, "Assets");
 const publicDirectory = path.join(root, "public");
 const indexPath = path.join(root, ".asset-index.json");
-const port = Number(process.env.PORT) || 3000;
+const port = Number(process.env.PORT) || 4000;
 const maxUploadSize = 25 * 1024 * 1024;
 
 const contentTypes = {
