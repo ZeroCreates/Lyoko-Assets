@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f2ed">
+    <title>Lyoko Assets</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Lyoko Assets home">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span>LYOKO <span class="brand-light">/ ASSETS</span></span>
+      </a>
+      <div class="topbar-right">
+        <span class="live-indicator"><span></span> LOCAL LIBRARY</span>
+        <a class="api-link" href="/api/links" target="_blank" rel="noreferrer">GET API <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <div class="sidebar-heading">COLLECTION</div>
+        <button class="filter-button is-active" type="button" data-filter="all">
+          <span class="filter-icon grid-icon" aria-hidden="true"></span>
+          <span>All assets</span>
+          <span class="filter-count" id="total-count">--</span>
+        </button>
+        <div class="sidebar-rule"></div>
+        <div class="sidebar-heading">VARIANTS</div>
+        <button class="filter-button" type="button" data-filter="standard">
+          <span class="variant-dot standard-dot" aria-hidden="true"></span>
+          <span>Standard</span>
+        </button>
+        <button class="filter-button" type="button" data-filter="normal">
+          <span class="variant-dot normal-dot" aria-hidden="true"></span>
+          <span>Normal</span>
+        </button>
+        <button class="filter-button" type="button" data-filter="xana">
+          <span class="variant-dot xana-dot" aria-hidden="true"></span>
+          <span>Xana</span>
+        </button>
+        <div class="sidebar-footer">
+          <span class="folder-mark" aria-hidden="true">▰</span>
+          <span>Assets/</span>
+          <span class="folder-state">SYNCED</span>
+        </div>
+      </aside>
+
+      <section class="library" aria-labelledby="page-title">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> DIGITAL ARCHIVE</div>
+            <h1 id="page-title">Asset library<span class="title-period">.</span></h1>
+            <p class="subheading">Browse, preview, and link your collection.</p>
+          </div>
+          <div class="asset-total"><span id="heading-count">--</span><span class="total-label">FILES</span></div>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box">
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="search-input" type="search" placeholder="Search assets" autocomplete="off">
+            <kbd>/</kbd>
+          </label>
+          <div class="sort-label"><span class="sort-dot" aria-hidden="true"></span> NAME <span class="sort-arrow" aria-hidden="true">↑</span></div>
+        </div>
+
+        <div id="asset-grid" class="asset-grid" aria-live="polite">
+          <div class="loading-state">Loading collection<span class="loading-dots">...</span></div>
+        </div>
+        <div id="empty-state" class="empty-state" hidden>No matching assets.</div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <footer class="page-footer"><span>LYOKO ASSET ARCHIVE</span><span>LINK PROVIDER <code>GET /api/links</code></span></footer>
+  </body>
+</html>

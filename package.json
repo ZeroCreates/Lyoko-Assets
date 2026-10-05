@@ -1,0 +1,9 @@
+{
+  "name": "lyoko-asset-browser",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local asset browser with a GET-based link provider.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
